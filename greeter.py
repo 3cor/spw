@@ -11,6 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_greeterWindow(object):
+
     def setupUi(self, greeterWindow):
         greeterWindow.setObjectName("greeterWindow")
         greeterWindow.setWindowModality(QtCore.Qt.NonModal)
@@ -113,11 +114,9 @@ class Ui_greeterWindow(object):
             _translate("greeterWindow", "Use an existing vault")
         )
 
-    def createNewVault():
+    def createNewVault(self):
         # TODO Add function to create new vault
-
         pass
-
 
     def openRecentVaults(self):
         # TODO change file extensions here
@@ -128,6 +127,7 @@ class Ui_greeterWindow(object):
         if fileName:
             # TODO Add logic here
             pass
+
 
 if __name__ == "__main__":
     import sys
