@@ -113,7 +113,14 @@ class Ui_greeterWindow(object):
             _translate("greeterWindow", "Use an existing vault")
         )
 
+    def createNewVault():
+        # TODO Add function to create new vault
+
+        pass
+
+
     def openRecentVaults(self):
+        # TODO change file extensions here
         fileName = QtWidgets.QFileDialog.getOpenFileName(
             None, "Open File", "/home", "Images (*.png *.xpm *.jpg)"
         )
@@ -121,9 +128,6 @@ class Ui_greeterWindow(object):
         if fileName:
             # TODO Add logic here
             pass
-
-
-    def open
 
 if __name__ == "__main__":
     import sys
