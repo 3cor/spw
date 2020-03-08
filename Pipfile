@@ -9,6 +9,7 @@ verify_ssl = true
 pyqt5 = "*"
 pymongo = "*"
 dnspython = "*"
+build = "*"
 
 [requires]
 python_version = "3.7"
