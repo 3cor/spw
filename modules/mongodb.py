@@ -1,9 +1,9 @@
 import pymongo
 
-def make_conn():
+def connect():
     client = pymongo.MongoClient(
-        "mongodb+srv://corgi:264135@cluster0-stxg5.mongodb.net/test?retryWrites=true&w=majority")
-    db = client.get_database('Practice')
+        "mongodb+srv://corgi:TIZnBqHEHh0VTtWI@cluster0-7jdrj.mongodb.net/test?retryWrites=true&w=majority")
+    db = client.get_database('spw')
     return db
 
 
@@ -14,10 +14,10 @@ def print_all(docs):
             print('{}: {}'.format(key, value))
 
 
-def ls(database):
-    pass
-
+def find(db):
+    docs = db.users.find()
+    print_all(docs)
 
 if __name__ == '__main__':
-    database = make_conn()
-    ls(database)
+    database = connect()
+    find(database)
