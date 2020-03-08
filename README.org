@@ -1,5 +1,8 @@
 * spw
+
 A simple password manager. To be named later.
+
+This project is managed with [[https://pipenv-fork.readthedocs.io/en/latest/basics.html][pipenv]].
 
 * Modules
 
@@ -9,6 +12,6 @@ Modules utilized by this application.
 
 Connect to MongoDB Atlas and handle database CRUD.
 
-** password.py
+** pass.py
 
 Generate secure password and passphrase using [[https://docs.python.org/3/library/secrets.html#recipes-and-best-practices][secrets]].
