@@ -1,0 +1,14 @@
+* spw
+A simple password manager. To be named later.
+
+* Modules
+
+Modules utilized by this application.
+
+** mongo.py
+
+Connect to MongoDB Atlas and handle database CRUD.
+
+** password.py
+
+Generate secure password and passphrase using [[https://docs.python.org/3/library/secrets.html#recipes-and-best-practices][secrets]].
