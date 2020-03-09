@@ -32,7 +32,7 @@ if __name__ == '__main__':
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("command", help="Command to use. Choose from: simple, secure, and passphrase")
+    parser.add_argument("command", help="Commands available: simple, secure, and passphrase")
     parser.add_argument("-n", "--number", help="Number of characters", type=int, default=8)
     parser.add_argument("-d", "--digit", help="Digits", type=int, default=3)
     parser.add_argument("-f", "--filepath", help="File path or buffer", default='data/words.txt')
