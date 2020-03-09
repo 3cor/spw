@@ -4,7 +4,7 @@ A simple password manager. To be named later.
 
 This project is managed with [[https://pipenv-fork.readthedocs.io/en/latest/basics.html][pipenv]].
 
-* Modules
+* modules
 
 Modules utilized by this application.
 
@@ -12,6 +12,11 @@ Modules utilized by this application.
 
 Connect to MongoDB Atlas and handle database CRUD.
 
-** pass.py
+** passgen.py
 
 Generate secure password and passphrase using [[https://docs.python.org/3/library/secrets.html#recipes-and-best-practices][secrets]].
+
+** xcrypt.py
+
+Encrypt and decrypt passwords.
+Refer to: [[https://stackoverflow.com/questions/2490334/simple-way-to-encode-a-string-according-to-a-password][this StackOverflow question.]]
