@@ -1,7 +1,8 @@
 # refer to: https://stackoverflow.com/questions/2490334/simple-way-to-encode-a-string-according-to-a-password
 
 import secrets
-from base64 import urlsafe_b64encode as b64e, urlsafe_b64decode as b64d
+from base64 import urlsafe_b64decode as b64d
+from base64 import urlsafe_b64encode as b64e
 
 from cryptography.fernet import Fernet
 from cryptography.hazmat.backends import default_backend
@@ -35,3 +36,25 @@ def password_decrypt(token: bytes, password: str) -> bytes:
     iterations = int.from_bytes(iter, 'big')
     key = _derive_key(password.encode(), salt, iterations)
     return Fernet(key).decrypt(token)
+
+if __name__ == '__main__':
+
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("command", help="Commands available: encypt and decrpt")
+    parser.add_argument("message", help="Message to be encrypt")
+    parser.add_argument("password", help="Password to encrypt and decrypt")
+    args = parser.parse_args()
+    command = args.command
+    password = args.password
+    message = args.message
+
+    if command == 'encrypt':
+        output = password_encrypt(message.encode(), password)
+    elif command == 'decrypt':
+        output = str(password_decrypt(bytes(message, 'utf-8'), password).decode())
+    else:
+        output == 'Wrong command'
+
+    print(output)
