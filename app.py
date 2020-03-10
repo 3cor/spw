@@ -4,6 +4,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import modules.passgen as pg
 import modules.mongodb as mg
 import modules.xcrypt as xc
+import hashlib
+import os
 
 
 class Ui_MainWindow(object):
@@ -228,6 +230,7 @@ class Ui_MainWindow(object):
         self.checkBoxSymbol.setText(_translate("MainWindow", "Include symbols"))
         self.lineEditSymbol.setText(_translate("MainWindow", "{}()[].,:;+-*/&|<>=~$"))
         self.lineEditNC.setText(_translate("MainWindow", "8"))
+        self.lineEditNW.setText(_translate("MainWindow", "8"))
         self.pushButtonGenWord.setText(_translate("MainWindow", "Generate password"))
         self.tabGenerate.setTabText(self.tabGenerate.indexOf(self.tabPassword), _translate("MainWindow", "Password"))
         self.label_7.setText(_translate("MainWindow", "Number of words"))
@@ -302,6 +305,7 @@ class Ui_MainWindow(object):
         self.stackedWidget.setCurrentIndex(i)
 
     def checkUser(self, usr, pwd):
+        pwd = hashlib.md5(pwd.encode('utf-8')).hexdigest()
         db = mg.connect()
         result = mg.get_user(db, usr, pwd)
         print(result)
@@ -338,13 +342,15 @@ class Ui_MainWindow(object):
                 self.pwd = pwd
                 self.syncTable()
                 self.display(3)
+                self.output("Sign in successfully!")
             else:
-                print("Wrong Username/Password")
+                self.output("Wrong Username/Password")
         else:
-            print("Please enter Username/Password")
+            self.output("Please enter Username/Password")
         
     def signUp(self):
         print('signUp()')
+        self.output("Signing you up...")
         self.display(1)
 
     # pageRG
@@ -368,18 +374,25 @@ class Ui_MainWindow(object):
                     self.addUser(usr, pwd)
                     self.syncTable()
                     self.display(3)
+                    self.output('Sign up succesfully!')
+
+                    self.rgLineEditUser.setText('')
+                    self.rgLineEditPass.setText('')
+                    self.rgLineEditConfirm.setText('')
+
                 else:
                     print("Username is already used!")
             else:
-                print("Password is not match!")
+                self.output("Passwords are not matched!")
         else:
-            print("Please enter Username/Password")
+            self.output("Please enter Username/Password")
 
     def rgBack(self):
         print('rgBack()')
         self.display(0)
 
     def addUser(self, usr, pwd):
+        pwd = hashlib.md5(pwd.encode('utf-8')).hexdigest()
         db = mg.connect()
         mg.add_user(db, usr, pwd)
 
@@ -391,7 +404,9 @@ class Ui_MainWindow(object):
         self.detLineEditPass.setText('')
         self.detLineEditConfirm.setText('')
         self.detLineEditURL.setText('')
+        self.detLabelEntry.setText('Add new entry')
         self.display(4)
+        self.output('Adding entry...')
 
     def etEdit(self):
         row = self.tableEntry.currentRow()
@@ -401,7 +416,9 @@ class Ui_MainWindow(object):
         self.detLineEditPass.setText(self.tableEntry.item(row, 2).text()) 
         self.detLineEditConfirm.setText(self.tableEntry.item(row, 2).text()) 
         self.detLineEditURL.setText(self.tableEntry.item(row, 3).text()) 
+        self.detLabelEntry.setText('Edit entry')
         self.display(4)
+        self.output('Editing entry...')
 
     def etDelete(self):
         self.etMode = 'delete'
@@ -413,6 +430,8 @@ class Ui_MainWindow(object):
     def etLockDB(self):
         self.user = None
         self.pwd = None
+        self.wcLineEditUser.setText('')
+        self.wcLineEditPass.setText('')
         self.display(0)
 
     # pageEntryCUD
@@ -456,14 +475,16 @@ class Ui_MainWindow(object):
                     self.editEntry(name, usr, pwd, url)
 
             else:
-                print("Password is not match!")
+                self.output("Passwords are not matched!")
         else:
-            print("All field must be filled!")
+            self.output("All field must be filled!")
         
         
 
     def detClickCancel(self):
+
         self.display(3)
+        self.output('You can manage your password here')
 
     def addEntry(self, name, usr, pwd, url):
 
@@ -485,6 +506,7 @@ class Ui_MainWindow(object):
         print(ret.inserted_id)
         self.syncTable()
         self.display(3)
+        self.output('Entry is added')
 
     def editEntry(self, name, usr, pwd, url):
 
@@ -501,6 +523,7 @@ class Ui_MainWindow(object):
         mg.edit_entry(db, self.user, curr, entry)
         self.syncTable()
         self.display(3)
+        self.output('Entry is edited')
         
     def deleteEntry(self):
 
@@ -509,7 +532,7 @@ class Ui_MainWindow(object):
         db = mg.connect()
         mg.delete_entry(db, self.user, curr)
         self.syncTable()
-
+        self.output('Entry is deleted')
         
     def getCurrentRow(self):
         # get selected row
@@ -530,6 +553,7 @@ class Ui_MainWindow(object):
 
     def goToGen(self):
         self.display(2)
+        self.output('You can generate secure password or passphrase here')
 
     # pageGen
 
@@ -542,16 +566,24 @@ class Ui_MainWindow(object):
         result = pg.secure(n, digit, with_symbol, symbols)
 
         self.textEditPassword.setPlainText(result)
+        self.output('Password is generated')
 
     def genPassphrase(self):
 
         n = int(self.lineEditNW.text())
-        result = pg.passphrase(n, 'data/words.txt')
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        filepath = os.path.join(dir_path, 'data/words.txt')
+        print(filepath)
+        result = pg.passphrase(n, filepath)
 
-        self.textEditPassword.setPlainText(result)
+        self.textEditPassphrase.setPlainText(result)
+        self.output('Passpharse is generated')
 
     def backToManager(self):
-        display(3)
+        self.display(3)
+        self.textEditPassword.setPlainText('')
+        self.textEditPassphrase.setPlainText('')
+        self.output('You can manage your password here')
 
 
 if __name__ == "__main__":
