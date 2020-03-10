@@ -10,21 +10,22 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_greeterWindow(object):
+class Ui_mainWindow(object):
 
-    def setupUi(self, greeterWindow):
-        greeterWindow.setObjectName("greeterWindow")
-        greeterWindow.setWindowModality(QtCore.Qt.NonModal)
-        greeterWindow.resize(600, 480)
+    switch_window = QtCore.pyqtSignal()
+
+    def setupUi(self, mainWindow):
+        mainWindow.setObjectName("mainWindow")
+        mainWindow.setWindowModality(QtCore.Qt.NonModal)
+        mainWindow.resize(600, 480)
         sizePolicy = QtWidgets.QSizePolicy(
             QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred
         )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(greeterWindow.sizePolicy().hasHeightForWidth())
-        greeterWindow.setSizePolicy(sizePolicy)
-        greeterWindow.setUnifiedTitleAndToolBarOnMac(True)
-        self.centralwidget = QtWidgets.QWidget(greeterWindow)
+        sizePolicy.setHeightForWidth(mainWindow.sizePolicy().hasHeightForWidth())
+        mainWindow.setSizePolicy(sizePolicy)
+        self.centralwidget = QtWidgets.QWidget(mainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName("gridLayout")
@@ -69,54 +70,57 @@ class Ui_greeterWindow(object):
         self.labelTitle.setWordWrap(True)
         self.labelTitle.setObjectName("labelTitle")
         self.gridLayout.addWidget(self.labelTitle, 0, 1, 8, 1)
-        greeterWindow.setCentralWidget(self.centralwidget)
-        self.statusbar = QtWidgets.QStatusBar(greeterWindow)
+        self.statusbar = QtWidgets.QStatusBar(mainWindow)
         self.statusbar.setObjectName("statusbar")
-        greeterWindow.setStatusBar(self.statusbar)
-        self.actionExit = QtWidgets.QAction(greeterWindow)
+        mainWindow.setStatusBar(self.statusbar)
+        self.actionExit = QtWidgets.QAction(mainWindow)
         self.actionExit.setObjectName("actionExit")
-        self.actionAbout = QtWidgets.QAction(greeterWindow)
+        self.actionAbout = QtWidgets.QAction(mainWindow)
         self.actionAbout.setObjectName("actionAbout")
-        self.actionCreate_a_new_vault = QtWidgets.QAction(greeterWindow)
+        self.actionCreate_a_new_vault = QtWidgets.QAction(mainWindow)
         self.actionCreate_a_new_vault.setObjectName("actionCreate_a_new_vault")
-        self.actionUse_an_existing_vault = QtWidgets.QAction(greeterWindow)
+        self.actionUse_an_existing_vault = QtWidgets.QAction(mainWindow)
         self.actionUse_an_existing_vault.setObjectName("actionUse_an_existing_vault")
 
-        self.retranslateUi(greeterWindow)
-        QtCore.QMetaObject.connectSlotsByName(greeterWindow)
+        self.retranslateUi(mainWindow)
+        QtCore.QMetaObject.connectSlotsByName(mainWindow)
 
         # Set tab orders
-        greeterWindow.setTabOrder(self.createButton, self.openButton)
-        greeterWindow.setTabOrder(self.openButton, self.recentListView)
-        greeterWindow.setTabOrder(self.recentListView, self.aboutButton)
-        greeterWindow.setTabOrder(self.aboutButton, self.settingsButton)
-        greeterWindow.setTabOrder(self.settingsButton, self.exitButton)
+        mainWindow.setTabOrder(self.createButton, self.openButton)
+        mainWindow.setTabOrder(self.openButton, self.recentListView)
+        mainWindow.setTabOrder(self.recentListView, self.aboutButton)
+        mainWindow.setTabOrder(self.aboutButton, self.settingsButton)
+        mainWindow.setTabOrder(self.settingsButton, self.exitButton)
+
+        mainWindow.switch_window.connect(self.show_window_two)
 
         # Add functionalites to buttons
+        self.openButton.clicked.connect(self.createNewVault)
         self.openButton.clicked.connect(self.openRecentVaults)
 
-    def retranslateUi(self, greeterWindow):
+    def retranslateUi(self, mainWindow):
         _translate = QtCore.QCoreApplication.translate
-        greeterWindow.setWindowTitle(_translate("greeterWindow", "MainWindow"))
-        self.createButton.setText(_translate("greeterWindow", "Create a new vault"))
-        self.exitButton.setText(_translate("greeterWindow", "Exit"))
-        self.recentLabel.setText(_translate("greeterWindow", "Recently opened vaults"))
-        self.aboutButton.setText(_translate("greeterWindow", "About"))
-        self.settingsButton.setText(_translate("greeterWindow", "Settings"))
-        self.openButton.setText(_translate("greeterWindow", "Open an existing vault"))
-        self.labelTitle.setText(_translate("greeterWindow", "Simple password manager"))
-        self.actionExit.setText(_translate("greeterWindow", "Exit"))
-        self.actionAbout.setText(_translate("greeterWindow", "About"))
+        mainWindow.setWindowTitle(_translate("mainWindow", "MainWindow"))
+        self.createButton.setText(_translate("mainWindow", "Create a new vault"))
+        self.exitButton.setText(_translate("mainWindow", "Exit"))
+        self.recentLabel.setText(_translate("mainWindow", "Recently opened vaults"))
+        self.aboutButton.setText(_translate("mainWindow", "About"))
+        self.settingsButton.setText(_translate("mainWindow", "Settings"))
+        self.openButton.setText(_translate("mainWindow", "Open an existing vault"))
+        self.labelTitle.setText(_translate("mainWindow", "Simple password manager"))
+        self.actionExit.setText(_translate("mainWindow", "Exit"))
+        self.actionAbout.setText(_translate("mainWindow", "About"))
         self.actionCreate_a_new_vault.setText(
-            _translate("greeterWindow", "Create a new vault")
+            _translate("mainWindow", "Create a new vault")
         )
         self.actionUse_an_existing_vault.setText(
-            _translate("greeterWindow", "Use an existing vault")
+            _translate("mainWindow", "Use an existing vault")
         )
+
 
     def createNewVault(self):
         # TODO Add function to create new vault
-        pass
+        self.switch_window.emit()
 
     def openRecentVaults(self):
         # TODO change file extensions here
@@ -128,13 +132,57 @@ class Ui_greeterWindow(object):
             # TODO Add logic here
             pass
 
+class Login(QtWidgets.QWidget, Ui_mainWindow):
 
-if __name__ == "__main__":
-    import sys
+    switch_window = QtCore.pyqtSignal()
 
+    def __init__(self):
+        QtWidgets.QWidget.__init__(self)
+        self.setupUi(self)
+
+        self.pushButton.clicked.connect(self.pushbutton_handler)
+
+    def pushbutton_handler(self):
+        self.switch_window.emit()
+
+
+class MainWindow(QtWidgets.QWidget, Ui_mainWindow):
+
+    switch_window = QtCore.pyqtSignal()
+
+    def __init__(self):
+        QtWidgets.QWidget.__init__(self)
+        self.setupUi(self)
+
+        self.pushButton.clicked.connect(self.pushbutton_handler)
+
+    def pushbutton_handler(self):
+        self.switch_window.emit()
+
+
+class Controller:
+
+    def __init__(self):
+        pass
+
+    def show_login(self):
+        self.login = Login()
+        self.login.switch_window.connect(self.show_main)
+        self.login.show()
+
+    def show_main(self):
+        self.window = MainWindow()
+        self.window.switch_window.connect(self.show_login)
+        self.login.close()
+        self.window.show()
+
+def main():
     app = QtWidgets.QApplication(sys.argv)
-    greeterWindow = QtWidgets.QMainWindow()
-    ui = Ui_greeterWindow()
-    ui.setupUi(greeterWindow)
-    greeterWindow.show()
+    controller = Controller()
+    controller.show_login()
     sys.exit(app.exec_())
+
+
+if __name__ == '__main__':
+    import sys
+    main()

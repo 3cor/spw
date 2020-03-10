@@ -8,10 +8,14 @@ def simple(n):
     return password
 
 
-def secure(n, digit):
+def secure(n, digit, with_symbol: bool, symbols = r'{}()[].,:;+-*/&|<>=~$'):
     """Generate a password with lowercase character,
     uppercase character, digit requirements"""
     alphabet = string.ascii_letters + string.digits
+
+    if with_symbol:
+        alphabet = alphabet + symbols
+
     while True:
         password = ''.join(secrets.choice(alphabet) for i in range(n))
         if (any(c.islower() for c in password)
@@ -33,19 +37,21 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument("command", help="Commands available: simple, secure, and passphrase")
-    parser.add_argument("-n", "--number", help="Number of characters", type=int, default=8)
+    parser.add_argument("number", help="Number of characters", type=int)
     parser.add_argument("-d", "--digit", help="Digits", type=int, default=3)
     parser.add_argument("-f", "--filepath", help="File path or buffer", default='data/words.txt')
+    parser.add_argument("-s", "--symbol", help="Should symbol be include?", type=bool, default=False)
     args = parser.parse_args()
     command = args.command
     n = args.number
     digit = args.digit
     filepath = args.filepath
+    with_symbol = args.symbol
 
     if command == 'simple':
         output = simple(n)
     elif command == 'secure':
-        output = secure(n, digit)
+        output = secure(n, digit, with_symbol)
     elif command == 'passphrase':
         output = passphrase(n, filepath)
     else:

@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>673</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="1">
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="currentIndex">
+       <number>2</number>
+      </property>
+      <widget class="QWidget" name="pageWC">
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="10" column="0">
+         <widget class="QPushButton" name="wcPushButtonSignin">
+          <property name="text">
+           <string>Sign in</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="0">
+         <widget class="QLineEdit" name="wcLineEditPass">
+          <property name="placeholderText">
+           <string>Password</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="0">
+         <widget class="QLineEdit" name="wcLineEditUser">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="placeholderText">
+           <string>Username</string>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="0">
+         <widget class="QPushButton" name="wcPushButtonSignup">
+          <property name="text">
+           <string>Sign up</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="0">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;Simple Password Manager&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:8pt; font-style:italic;&quot;&gt;Developed by Nitis Monburinon&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Welcome to Simple Passsword Manager!&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Simple Password Manager helps you to create your own password database and store it on MongoDB Atlas. &lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Please sign in using your registed username or sign up for a new account.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pageRG">
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QLabel" name="label_3">
+          <property name="font">
+           <font>
+            <pointsize>36</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Create new account&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Your password will be a master key.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Master key is used to encrypt and decrypt your password database.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;If you lose your password, you cannot unlock your database!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="rgLineEditUser">
+          <property name="placeholderText">
+           <string>Username</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="rgLineEditPass">
+          <property name="placeholderText">
+           <string>Password</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="rgLineEditConfirm">
+          <property name="placeholderText">
+           <string>Confirm Password</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="rgPushButtonSubmit">
+          <property name="text">
+           <string>Submit</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="rgPushButtonBack">
+          <property name="text">
+           <string>Back</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pageGEN">
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="0" column="0" colspan="2">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;Simple Password Generator&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Simple password generator helps your generate cryptographically strong random password.&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;Here you have to options:&lt;/p&gt;&lt;p&gt;1. Generate random password from alphabet characters, numbers, or symbols.&lt;/p&gt;&lt;p&gt;2. Genrate random passphrase from wordlists. &lt;/p&gt;&lt;p&gt;This option is easier to remember. However, it is more susceptible to dictionary attack.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QTabWidget" name="tabGenerate">
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="tabPassword">
+           <attribute name="title">
+            <string>Password</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <layout class="QFormLayout" name="formLayout_2">
+              <property name="fieldGrowthPolicy">
+               <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+              </property>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_5">
+                <property name="text">
+                 <string>Number of characters</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="label_6">
+                <property name="text">
+                 <string>Minimum digits</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLineEdit" name="lineEditDG">
+                <property name="text">
+                 <string>3</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QCheckBox" name="checkBoxSymbol">
+                <property name="text">
+                 <string>Include symbols</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLineEdit" name="lineEditSymbol">
+                <property name="text">
+                 <string>{}()[].,:;+-*/&amp;|&lt;&gt;=~$</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLineEdit" name="lineEditNC">
+                <property name="text">
+                 <string>8</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonGenWord">
+              <property name="text">
+               <string>Generate password</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPlainTextEdit" name="textEditPassword"/>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tabPassphrase">
+           <attribute name="title">
+            <string>Passphrase</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item>
+             <layout class="QFormLayout" name="formLayout_3">
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="lineEditNW"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_7">
+                <property name="text">
+                 <string>Number of words</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonGenPhrase">
+              <property name="text">
+               <string>Generate passphrase</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPlainTextEdit" name="textEditPassphrase"/>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="pushButtonBackToManager">
+          <property name="text">
+           <string>Back to manager</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pageEntry">
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="3" column="3">
+         <widget class="QPushButton" name="pushButtonGen">
+          <property name="text">
+           <string>Generate Pass</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QPushButton" name="pushButtonDelete">
+          <property name="text">
+           <string>Delete entry</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QPushButton" name="pushButtonEdit">
+          <property name="text">
+           <string>Edit entry</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QPushButton" name="pushButtonNew">
+          <property name="text">
+           <string>New entry</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="4">
+         <widget class="QPushButton" name="pushButtonLock">
+          <property name="text">
+           <string>Lock</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0" colspan="5">
+         <widget class="QTableWidget" name="tableEntry">
+          <property name="rowCount">
+           <number>0</number>
+          </property>
+          <property name="columnCount">
+           <number>0</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="5">
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;Password manager&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Manage your password database&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;All data are encrypted with your masterkey when they are uploaded to the cloud&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pageEntryCUD">
+       <layout class="QGridLayout" name="gridLayout_6">
+        <item row="5" column="0">
+         <widget class="QLineEdit" name="detLineEditURL">
+          <property name="placeholderText">
+           <string>URL</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0">
+         <widget class="QPushButton" name="detOK">
+          <property name="text">
+           <string>OK</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLineEdit" name="detLineEditName">
+          <property name="placeholderText">
+           <string>Name</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="0">
+         <widget class="QPushButton" name="detCancel">
+          <property name="text">
+           <string>Cancel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLineEdit" name="detLineEditUser">
+          <property name="placeholderText">
+           <string>Username</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLineEdit" name="detLineEditConfirm">
+          <property name="placeholderText">
+           <string>Password</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLineEdit" name="detLineEditPass">
+          <property name="placeholderText">
+           <string>Confirm Password</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="detLabelEntry">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;ENTRY&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLabel" name="labelOutput">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

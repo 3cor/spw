@@ -51,9 +51,9 @@ if __name__ == '__main__':
     message = args.message
 
     if command == 'e' or command == 'encrypt':
-        output = str(password_encrypt(message.encode(), password))
+        output = password_encrypt(message.encode(), password).decode('utf-8')
     elif command == 'd' or command == 'decrypt':
-        output = password_decrypt(bytes(message, 'utf-8'), password).decode()
+        output = password_decrypt(bytes(message, 'utf-8'), password).decode('utf-8')
     else:
         output == 'Wrong command'
 
