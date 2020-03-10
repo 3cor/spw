@@ -18,7 +18,7 @@ def _derive_key(password: bytes, salt: bytes, iterations: int = iterations) -> b
         algorithm=hashes.SHA256(), length=32, salt=salt,
         iterations=iterations, backend=backend)
     return b64e(kdf.derive(password))
-
+    
 def password_encrypt(message: bytes, password: str, iterations: int = iterations) -> bytes:
     salt = secrets.token_bytes(16)
     key = _derive_key(password.encode(), salt, iterations)

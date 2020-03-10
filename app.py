@@ -7,12 +7,10 @@ import modules.xcrypt as xc
 import hashlib
 import os
 
-
 class Ui_MainWindow(object):
-
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 673)
+        MainWindow.resize(800, 722)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
@@ -206,8 +204,40 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.stackedWidget.setCurrentIndex(0)
-        self.tabGenerate.setCurrentIndex(0)
+        self.tabGenerate.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        MainWindow.setTabOrder(self.wcLineEditUser, self.wcLineEditPass)
+        MainWindow.setTabOrder(self.wcLineEditPass, self.wcPushButtonSignin)
+        MainWindow.setTabOrder(self.wcPushButtonSignin, self.wcPushButtonSignup)
+        MainWindow.setTabOrder(self.wcPushButtonSignup, self.rgLineEditUser)
+        MainWindow.setTabOrder(self.rgLineEditUser, self.rgLineEditPass)
+        MainWindow.setTabOrder(self.rgLineEditPass, self.rgLineEditConfirm)
+        MainWindow.setTabOrder(self.rgLineEditConfirm, self.rgPushButtonSubmit)
+        MainWindow.setTabOrder(self.rgPushButtonSubmit, self.rgPushButtonBack)
+        MainWindow.setTabOrder(self.rgPushButtonBack, self.tabGenerate)
+        MainWindow.setTabOrder(self.tabGenerate, self.lineEditNC)
+        MainWindow.setTabOrder(self.lineEditNC, self.lineEditDG)
+        MainWindow.setTabOrder(self.lineEditDG, self.lineEditSymbol)
+        MainWindow.setTabOrder(self.lineEditSymbol, self.checkBoxSymbol)
+        MainWindow.setTabOrder(self.checkBoxSymbol, self.pushButtonGenWord)
+        MainWindow.setTabOrder(self.pushButtonGenWord, self.textEditPassword)
+        MainWindow.setTabOrder(self.textEditPassword, self.pushButtonBackToManager)
+        MainWindow.setTabOrder(self.pushButtonBackToManager, self.pushButtonNew)
+        MainWindow.setTabOrder(self.pushButtonNew, self.pushButtonEdit)
+        MainWindow.setTabOrder(self.pushButtonEdit, self.pushButtonDelete)
+        MainWindow.setTabOrder(self.pushButtonDelete, self.pushButtonGen)
+        MainWindow.setTabOrder(self.pushButtonGen, self.pushButtonLock)
+        MainWindow.setTabOrder(self.pushButtonLock, self.tableEntry)
+        MainWindow.setTabOrder(self.tableEntry, self.detLineEditName)
+        MainWindow.setTabOrder(self.detLineEditName, self.detLineEditUser)
+        MainWindow.setTabOrder(self.detLineEditUser, self.lineEditNW)
+        MainWindow.setTabOrder(self.lineEditNW, self.detLineEditPass)
+        MainWindow.setTabOrder(self.detLineEditPass, self.detLineEditConfirm)
+        MainWindow.setTabOrder(self.detLineEditConfirm, self.detLineEditURL)
+        MainWindow.setTabOrder(self.detLineEditURL, self.detOK)
+        MainWindow.setTabOrder(self.detOK, self.detCancel)
+        MainWindow.setTabOrder(self.detCancel, self.textEditPassphrase)
+        MainWindow.setTabOrder(self.textEditPassphrase, self.pushButtonGenPhrase)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -230,9 +260,9 @@ class Ui_MainWindow(object):
         self.checkBoxSymbol.setText(_translate("MainWindow", "Include symbols"))
         self.lineEditSymbol.setText(_translate("MainWindow", "{}()[].,:;+-*/&|<>=~$"))
         self.lineEditNC.setText(_translate("MainWindow", "8"))
-        self.lineEditNW.setText(_translate("MainWindow", "8"))
         self.pushButtonGenWord.setText(_translate("MainWindow", "Generate password"))
         self.tabGenerate.setTabText(self.tabGenerate.indexOf(self.tabPassword), _translate("MainWindow", "Password"))
+        self.lineEditNW.setText(_translate("MainWindow", "8"))
         self.label_7.setText(_translate("MainWindow", "Number of words"))
         self.pushButtonGenPhrase.setText(_translate("MainWindow", "Generate passphrase"))
         self.tabGenerate.setTabText(self.tabGenerate.indexOf(self.tabPassphrase), _translate("MainWindow", "Passphrase"))
@@ -248,20 +278,17 @@ class Ui_MainWindow(object):
         self.detLineEditName.setPlaceholderText(_translate("MainWindow", "Name"))
         self.detCancel.setText(_translate("MainWindow", "Cancel"))
         self.detLineEditUser.setPlaceholderText(_translate("MainWindow", "Username"))
-        self.detLineEditConfirm.setPlaceholderText(_translate("MainWindow", "Password"))
-        self.detLineEditPass.setPlaceholderText(_translate("MainWindow", "Confirm Password"))
+        self.detLineEditConfirm.setPlaceholderText(_translate("MainWindow", "Confirm Password"))
+        self.detLineEditPass.setPlaceholderText(_translate("MainWindow", "Password"))
         self.detLabelEntry.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:36pt;\">ENTRY</span></p></body></html>"))
 
         # DO NOT MODIFY GENERATED UI CODE PAST HERE 
         self.config()
 
-    # TODO Remove or replace
     user = None
     pwd = None
 
     def config(self):
-
-        # TODO Hide input password
 
         # Add signal to buttons
         self.wcPushButtonSignin.clicked.connect(self.signIn)
@@ -356,7 +383,6 @@ class Ui_MainWindow(object):
     # pageRG
 
     def rgSubmit(self):
-        # TODO Check credentials and connect td db
         usr = self.rgLineEditUser.text()
         pwd = self.rgLineEditPass.text()
         cfp = self.rgLineEditConfirm.text()
@@ -401,6 +427,7 @@ class Ui_MainWindow(object):
     def etNew(self):
         self.etMode = 'new'
         self.detLineEditName.setText('')
+        self.detLineEditUser.setText('')
         self.detLineEditPass.setText('')
         self.detLineEditConfirm.setText('')
         self.detLineEditURL.setText('')
@@ -409,6 +436,7 @@ class Ui_MainWindow(object):
         self.output('Adding entry...')
 
     def etEdit(self):
+        
         row = self.tableEntry.currentRow()
         self.etMode = 'edit'
         self.detLineEditName.setText(self.tableEntry.item(row, 0).text()) 
@@ -443,11 +471,10 @@ class Ui_MainWindow(object):
         for r in result:
             entry = [
                 r['name'],
-                r['user'],
-                r['pass'],
-                r['url']
+                self.decrypt(r['user']),
+                self.decrypt(r['pass']),
+                self.decrypt(r['url'])
             ]
-            entry = [self.decrypt(e) for e in entry]
             self.table_appender(self.tableEntry, *entry)
             # print(r)
 
@@ -455,7 +482,7 @@ class Ui_MainWindow(object):
         name = self.detLineEditName.text()
         usr = self.detLineEditUser.text()
         pwd = self.detLineEditPass.text()
-        pcf = self.rgLineEditConfirm.text()
+        pcf = self.detLineEditConfirm.text()
         url = self.detLineEditURL.text()
 
         print('detOK()')
@@ -465,9 +492,8 @@ class Ui_MainWindow(object):
         print('Confirm Password:' + pcf)
         print('URL:' + url)
 
-        if '' not in (e.strip() for e in (name, usr, pwd, pcf, url)):
-            if pwd != pcf:
-                
+        if name.strip() != '' and usr.strip() != '' and pwd.strip() != '' and pcf.strip() != '' and url.strip() != '':
+            if pwd == pcf:           
                 # Conditions passed!
                 if self.etMode == 'new':
                     self.addEntry(name, usr, pwd, url)
@@ -478,8 +504,6 @@ class Ui_MainWindow(object):
                 self.output("Passwords are not matched!")
         else:
             self.output("All field must be filled!")
-        
-        
 
     def detClickCancel(self):
 
@@ -498,8 +522,8 @@ class Ui_MainWindow(object):
 
         # Encrypt every entry
         for k, v in entry.items():
-            if k != 'owner':
-             entry[k] = self.encrypt(v)
+            if k != 'owner' and k != 'name':
+                entry[k] = self.encrypt(v)
 
         db = mg.connect()
         ret = mg.add_entry(db, self.user, entry)
@@ -510,20 +534,28 @@ class Ui_MainWindow(object):
 
     def editEntry(self, name, usr, pwd, url):
 
+
         curr = self.getCurrentRow()
 
         entry = {
-            'owner': self.user,
-            'name': name,
-            'user': usr,
-            'pass': pwd,
-            'url': url
+                'owner': self.user,
+                'name': name,
+                'user': usr,
+                'pass': pwd,
+                'url': url
         }
+
+        # Encrypt every entry
+        for k, v in entry.items():
+            if k != 'owner' and k != 'name':
+                entry[k] = self.encrypt(v)
+
         db = mg.connect()
         mg.edit_entry(db, self.user, curr, entry)
         self.syncTable()
         self.display(3)
         self.output('Entry is edited')
+   
         
     def deleteEntry(self):
 
@@ -533,6 +565,7 @@ class Ui_MainWindow(object):
         mg.delete_entry(db, self.user, curr)
         self.syncTable()
         self.output('Entry is deleted')
+
         
     def getCurrentRow(self):
         # get selected row

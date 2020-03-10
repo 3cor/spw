@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>673</height>
+    <height>722</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <item row="0" column="1">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="pageWC">
        <layout class="QGridLayout" name="gridLayout_2">
@@ -134,7 +134,7 @@
         <item row="1" column="0">
          <widget class="QTabWidget" name="tabGenerate">
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="tabPassword">
            <attribute name="title">
@@ -213,7 +213,11 @@
             <item>
              <layout class="QFormLayout" name="formLayout_3">
               <item row="1" column="1">
-               <widget class="QLineEdit" name="lineEditNW"/>
+               <widget class="QLineEdit" name="lineEditNW">
+                <property name="text">
+                 <string>8</string>
+                </property>
+               </widget>
               </item>
               <item row="1" column="0">
                <widget class="QLabel" name="label_7">
@@ -376,6 +380,41 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <tabstops>
+  <tabstop>wcLineEditUser</tabstop>
+  <tabstop>wcLineEditPass</tabstop>
+  <tabstop>wcPushButtonSignin</tabstop>
+  <tabstop>wcPushButtonSignup</tabstop>
+  <tabstop>rgLineEditUser</tabstop>
+  <tabstop>rgLineEditPass</tabstop>
+  <tabstop>rgLineEditConfirm</tabstop>
+  <tabstop>rgPushButtonSubmit</tabstop>
+  <tabstop>rgPushButtonBack</tabstop>
+  <tabstop>tabGenerate</tabstop>
+  <tabstop>lineEditNC</tabstop>
+  <tabstop>lineEditDG</tabstop>
+  <tabstop>lineEditSymbol</tabstop>
+  <tabstop>checkBoxSymbol</tabstop>
+  <tabstop>pushButtonGenWord</tabstop>
+  <tabstop>textEditPassword</tabstop>
+  <tabstop>pushButtonBackToManager</tabstop>
+  <tabstop>pushButtonNew</tabstop>
+  <tabstop>pushButtonEdit</tabstop>
+  <tabstop>pushButtonDelete</tabstop>
+  <tabstop>pushButtonGen</tabstop>
+  <tabstop>pushButtonLock</tabstop>
+  <tabstop>tableEntry</tabstop>
+  <tabstop>detLineEditName</tabstop>
+  <tabstop>detLineEditUser</tabstop>
+  <tabstop>lineEditNW</tabstop>
+  <tabstop>detLineEditPass</tabstop>
+  <tabstop>detLineEditConfirm</tabstop>
+  <tabstop>detLineEditURL</tabstop>
+  <tabstop>detOK</tabstop>
+  <tabstop>detCancel</tabstop>
+  <tabstop>textEditPassphrase</tabstop>
+  <tabstop>pushButtonGenPhrase</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
