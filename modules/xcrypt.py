@@ -42,18 +42,18 @@ if __name__ == '__main__':
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("command", help="Commands available: encypt and decrpt")
+    parser.add_argument("command", help="Commands available: encrypt and decrypt")
+    parser.add_argument("password", help="Password or passphrase to be used")
     parser.add_argument("message", help="Message to be encrypt")
-    parser.add_argument("password", help="Password to encrypt and decrypt")
     args = parser.parse_args()
     command = args.command
     password = args.password
     message = args.message
 
-    if command == 'encrypt':
-        output = password_encrypt(message.encode(), password)
-    elif command == 'decrypt':
-        output = str(password_decrypt(bytes(message, 'utf-8'), password).decode())
+    if command == 'e' or command == 'encrypt':
+        output = str(password_encrypt(message.encode(), password))
+    elif command == 'd' or command == 'decrypt':
+        output = password_decrypt(bytes(message, 'utf-8'), password).decode()
     else:
         output == 'Wrong command'
 
