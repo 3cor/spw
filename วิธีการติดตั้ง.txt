@@ -1,0 +1,21 @@
+หลังจากแตกไฟล์ .zip ออกมา
+
+1. ติดตั้งแพคเกจ pipenv เพื่อจัดการ Dependencies https://pypi.org/project/pipenv/
+
+    pip install pipenv --user
+
+2. รันคำสั่ง pipenv shell เพื่อเข้าสู่ virtual environment
+
+    pipenv shell
+
+3. รันโปรแกรมด้วย python3 app.py
+
+    python3 app.py
+
+4. หากต้องการทดลองโมดูล สามารถรันได้ด้วยคำสั่งตัวอย่าง เช่น
+
+    python3 modules/passgen.py secure 12 -d 3
+
+    python3 modules/passgen.py passphrase 25
+
+    python3 modules/xcrypt.py e mypass ite-428 
