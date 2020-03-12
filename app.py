@@ -7,6 +7,7 @@ import modules.xcrypt as xc
 import hashlib
 import os
 
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -282,7 +283,7 @@ class Ui_MainWindow(object):
         self.detLineEditPass.setPlaceholderText(_translate("MainWindow", "Password"))
         self.detLabelEntry.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:36pt;\">ENTRY</span></p></body></html>"))
 
-        # DO NOT MODIFY GENERATED UI CODE PAST HERE 
+        # DO NOT MODIFY GENERATED UI CODE PAST HERE
         self.config()
 
     user = None
@@ -302,7 +303,7 @@ class Ui_MainWindow(object):
         self.pushButtonDelete.clicked.connect(self.etDelete)
         self.pushButtonGen.clicked.connect(self.etGenerate)
         self.pushButtonLock.clicked.connect(self.etLockDB)
-        
+
         self.detOK.clicked.connect(self.detClickOK)
         self.detCancel.clicked.connect(self.detClickCancel)
 
@@ -317,7 +318,7 @@ class Ui_MainWindow(object):
         self.tableEntry.setHorizontalHeaderLabels("Name;Username;Password;URL".split(";"))
         self.tableEntry.setSelectionBehavior(QtWidgets.QTableView.SelectRows)
 
-        header = self.tableEntry.horizontalHeader()       
+        header = self.tableEntry.horizontalHeader()
         header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
         header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
         header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
@@ -374,7 +375,7 @@ class Ui_MainWindow(object):
                 self.output("Wrong Username/Password")
         else:
             self.output("Please enter Username/Password")
-        
+
     def signUp(self):
         print('signUp()')
         self.output("Signing you up...")
@@ -436,14 +437,14 @@ class Ui_MainWindow(object):
         self.output('Adding entry...')
 
     def etEdit(self):
-        
+
         row = self.tableEntry.currentRow()
         self.etMode = 'edit'
-        self.detLineEditName.setText(self.tableEntry.item(row, 0).text()) 
-        self.detLineEditUser.setText(self.tableEntry.item(row, 1).text()) 
-        self.detLineEditPass.setText(self.tableEntry.item(row, 2).text()) 
-        self.detLineEditConfirm.setText(self.tableEntry.item(row, 2).text()) 
-        self.detLineEditURL.setText(self.tableEntry.item(row, 3).text()) 
+        self.detLineEditName.setText(self.tableEntry.item(row, 0).text())
+        self.detLineEditUser.setText(self.tableEntry.item(row, 1).text())
+        self.detLineEditPass.setText(self.tableEntry.item(row, 2).text())
+        self.detLineEditConfirm.setText(self.tableEntry.item(row, 2).text())
+        self.detLineEditURL.setText(self.tableEntry.item(row, 3).text())
         self.detLabelEntry.setText('Edit entry')
         self.display(4)
         self.output('Editing entry...')
@@ -493,7 +494,7 @@ class Ui_MainWindow(object):
         print('URL:' + url)
 
         if name.strip() != '' and usr.strip() != '' and pwd.strip() != '' and pcf.strip() != '' and url.strip() != '':
-            if pwd == pcf:           
+            if pwd == pcf:
                 # Conditions passed!
                 if self.etMode == 'new':
                     self.addEntry(name, usr, pwd, url)
@@ -534,7 +535,6 @@ class Ui_MainWindow(object):
 
     def editEntry(self, name, usr, pwd, url):
 
-
         curr = self.getCurrentRow()
 
         entry = {
@@ -555,8 +555,7 @@ class Ui_MainWindow(object):
         self.syncTable()
         self.display(3)
         self.output('Entry is edited')
-   
-        
+
     def deleteEntry(self):
 
         curr = self.getCurrentRow()
@@ -566,7 +565,6 @@ class Ui_MainWindow(object):
         self.syncTable()
         self.output('Entry is deleted')
 
-        
     def getCurrentRow(self):
         # get selected row
         row = self.tableEntry.currentRow()
@@ -591,7 +589,7 @@ class Ui_MainWindow(object):
     # pageGen
 
     def genPassword(self):
-        
+
         n = int(self.lineEditNC.text())
         digit = int(self.lineEditDG.text())
         with_symbol = self.checkBoxSymbol.isChecked()
@@ -627,4 +625,3 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
-
